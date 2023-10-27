@@ -46,11 +46,11 @@ int main(void)
     clear(&S); // 清空栈
     if (pop(&S, &val))
     {
-        printf("出栈成功，出栈的元素是%d \n", val);
+        printf("pop succeeded and the value is %d \n", val);
     }
     else
     {
-        printf("出栈失败! \n");
+        printf("pop failed! \n");
     }
 
     return 0;
