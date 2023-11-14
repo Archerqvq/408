@@ -1,3 +1,12 @@
+/**
+ * @file order_list.c
+ * @author Achar
+ * @version 1.0
+ * @brief order list compliment, with reference by Mr.Hao and change somewhere by myself
+ *
+ * @date 2023-11-14
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -48,7 +57,7 @@ int main(void)
     show_arr(&array);
     invert_arr(&array);
     show_arr(&array);
-    if(get_arr(&array, 5, &val_pos))
+    if (get_arr(&array, 5, &val_pos))
     {
         printf("Get value input, and its position is %d\r\n", val_pos);
     }
@@ -110,7 +119,9 @@ bool arr_append(parr array, int val)
         exit(-1);
     }
 
+    // *((array->pBase) + array->cnt) = val;
     array->pBase[array->cnt] = val;
+
     array->cnt++;
 }
 
@@ -124,6 +135,7 @@ void show_arr(parr array)
 
     for (i = 0; i < array->cnt; i++)
     {
+        // printf("%d ", *(array->pBase + i));
         printf("%d ", array->pBase[i]);
     }
     printf("\n");
@@ -136,7 +148,6 @@ void show_arr(parr array)
 void sort_arr(parr array)
 {
     int i, j, tmp;
-
     // Bubble sort
     for (i = 0; i < array->cnt - 1; i++)
     {
@@ -148,6 +159,13 @@ void sort_arr(parr array)
                 array->pBase[j] = array->pBase[j + 1];
                 array->pBase[j + 1] = tmp;
             }
+
+            // if (*(array->pBase + j) > *(array->pBase + j + 1))
+            // {
+            //     tmp = *(array->pBase + j);
+            //     *(array->pBase + j) = *(array->pBase + j + 1);
+            //     *(array->pBase + j + 1) = tmp;
+            // }
         }
     }
 }
@@ -172,9 +190,11 @@ bool insert_arr(parr array, int pos, int val)
     // Move elementes of the array from backward
     for (i = array->cnt - 1; i >= pos - 1; i--)
     {
+        //  *(array->pBase + i + 1) = *(array->pBase + i);
         array->pBase[i + 1] = array->pBase[i];
     }
 
+    // *(array->pBase + (pos - 1)) = val;
     array->pBase[pos - 1] = val;
     array->cnt++;
 
@@ -198,10 +218,12 @@ bool delete_arr(parr array, int pos, int *ret_val)
         return false;
     }
     // Get the deleted element before deleting it
+    // *ret_val = *(array->pBase + (pos - 1));
     *ret_val = array->pBase[pos - 1];
     // Rearrange the array
     for (int i = pos - 1; i < array->cnt; i++)
     {
+        // *(array->pBase + i) = *(array->pBase + i + 1);
         array->pBase[i] = array->pBase[i + 1];
     }
 
@@ -220,6 +242,9 @@ void invert_arr(parr array)
 
     for (i = 0; i < array->cnt / 2; i++)
     {
+        // tmp = *(array->pBase + i);
+        // *(array->pBase + i) = *(array->pBase + array->cnt - 1 - i);
+        // *(array->pBase + array->cnt - 1 - i) = tmp;
         tmp = array->pBase[i];
         array->pBase[i] = array->pBase[array->cnt - i - 1];
         array->pBase[array->cnt - i - 1] = tmp;
@@ -240,7 +265,8 @@ bool get_arr(parr array, int val, int *ret_pos)
 
     for (i = 0; i < array->cnt; i++)
     {
-        if(array->pBase[i] == val)
+        // if (*(array->pBase + i) == val)
+        if (array->pBase[i] == val)
         {
             *ret_pos = i + 1;
             return true;
