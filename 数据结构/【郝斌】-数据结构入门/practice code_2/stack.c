@@ -2,14 +2,14 @@
  * @file stack.c
  * @author Achar
  * @version 1.0
- * @brief Dynamic stack implement in C
+ * @brief Review
  *
  * @date 2023-10-27
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct Node
 {
@@ -27,36 +27,24 @@ void init_stack(PSTACK pS);
 void push(PSTACK pS, int val);
 bool pop(PSTACK, int *);
 void traverse(PSTACK pS);
-bool pop(PSTACK, int *);
 bool empty(PSTACK);
 void clear(PSTACK); // Clear up the stack
 
 int main(void)
 {
     STACK S;
-    PSTACK PS = NULL;
+    PSTACK pS = &S;
     int val;
 
-    // ! Does not work
-    // init_stack(PS);
-    // push(PS, 1);
-    // push(PS, 2);
-    // push(PS, 3);
-    // push(PS, 4);
-    // push(PS, 5);
-    // traverse(PS);
-
-    init_stack(&S);
-    clear(&S);
-    push(&S, 1);
-    push(&S, 2);
-    push(&S, 3);
-    push(&S, 4);
-    push(&S, 5);
-    push(&S, 6);
-    traverse(&S);
-    clear(&S);
-    if (pop(&S, &val))
+    init_stack(pS);
+    push(pS, 1);
+    push(pS, 2);
+    push(pS, 3);
+    push(pS, 4);
+    push(pS, 5);
+    push(pS, 6);
+    traverse(pS);
+    if (pop(pS, &val))
     {
         printf("pop succeeded and the value is %d \n", val);
     }
@@ -64,29 +52,31 @@ int main(void)
     {
         printf("pop failed! \n");
     }
-    push(&S, 1);
-    push(&S, 2);
-    push(&S, 3);
-    push(&S, 4);
-    push(&S, 5);
-    traverse(&S);
+    clear(pS);
+
+    if (pop(pS, &val))
+    {
+        printf("pop succeeded and the value is %d \n", val);
+    }
+    else
+    {
+        printf("pop failed! \n");
+    }
 
     return 0;
 }
 
 /**
- * @brief Initilize the void node that is pointed by top and bottom pointer of stack
+ * @brief
  * @param  pS               My Param doc
  */
 void init_stack(PSTACK pS)
 {
-    // To create one node that do not contain data but only for the initialization state of the stack
     pS->pTop = (PNODE)malloc(sizeof(NODE));
 
-    // Make sure the node is created successfully, so do some check mechanisms
     if (pS->pTop == NULL)
     {
-        printf("Memory allocation failed \n");
+        printf("Memory allocation failed\n");
         exit(-1);
     }
     else
@@ -106,8 +96,6 @@ void push(PSTACK pS, int val)
     PNODE pNew = (PNODE)malloc(sizeof(NODE));
 
     pNew->data = val;
-    // Acording to the features of stack
-    // These two statements below should be executed in order
     pNew->pNext = pS->pTop;
     pS->pTop = pNew;
 }
@@ -122,9 +110,10 @@ void traverse(PSTACK pS)
 
     while (p != pS->pBottom)
     {
-        printf("%d\n", p->data);
+        printf("%d  ", p->data);
         p = p->pNext;
     }
+    printf("\n");
 }
 
 /**
@@ -135,11 +124,14 @@ void traverse(PSTACK pS)
  */
 bool empty(PSTACK pS)
 {
-    // ((pS->pTop) == (pS->pBottom)) ? true : false;
     if (pS->pTop == pS->pBottom)
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
 /**
@@ -175,17 +167,19 @@ void clear(PSTACK pS)
 {
     if (empty(pS))
     {
-        printf("Empty stack, no need to clear up\n");
     }
     else
     {
+        PNODE p = pS->pTop;
         PNODE q = NULL;
 
-        while (pS->pTop != pS->pBottom)
+        while (p != pS->pBottom)
         {
-            q = pS->pTop->pNext;
-            free(pS->pTop);
-            pS->pTop = q;
+            q = p->pNext;
+            free(p);
+            p = q;
         }
+
+        pS->pTop = pS->pBottom;
     }
 }
