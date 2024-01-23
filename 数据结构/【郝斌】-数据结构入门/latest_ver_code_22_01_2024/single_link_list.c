@@ -204,15 +204,24 @@ bool sort_list(PNODE pHead)
     {
         for (j = 0; j < len - 1 - i; j++)
         {
-            tmp_p = p->pNext;
-            q = p->pNext->pNext;
-            if (tmp_p->data < q->data)
+            // tmp_p = p->pNext;
+            // q = p->pNext->pNext;
+            // if (tmp_p->data < q->data)
+            // {
+            //     tmp_data = tmp_p->data;
+            //     tmp_p->data = q->data;
+            //     q->data = tmp_data;
+            // }
+            // p = p->pNext;
+
+            p = p->pNext;
+            q = p->pNext;
+            if (p->data < q->data)
             {
-                tmp_data = tmp_p->data;
-                tmp_p->data = q->data;
+                tmp_data = p->data;
+                p->data = q->data;
                 q->data = tmp_data;
             }
-            p = p->pNext;
         }
         p = pHead;
     }
