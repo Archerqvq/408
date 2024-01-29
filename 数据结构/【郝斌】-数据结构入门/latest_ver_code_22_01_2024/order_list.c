@@ -26,7 +26,7 @@ int main(void)
 {
     parr pa;
     int del_val, idx;
-
+	
     init_arr(&pa, 10);
     arr_append(pa, 1);
     arr_append(pa, 2);
@@ -39,9 +39,13 @@ int main(void)
         printf("Deleted element is %d\n", del_val);
     }
 
+	show_arr(pa);
     insert_arr(pa, 3, 5);
+	show_arr(pa);
     insert_arr(pa, 2, 11);
+	show_arr(pa);
     arr_append(pa, 6);
+	show_arr(pa);
     insert_arr(pa, 3, 10);
     show_arr(pa);
     invert_arr(pa);
@@ -67,7 +71,7 @@ int main(void)
 
 void init_arr(parr *array, int length)
 {
-    *array = (parr)malloc(sizeof(parr));
+    *array = (parr)malloc(sizeof(arr));
     (*array)->pBase = (int *)malloc(sizeof(int) * length);
     (*array)->cnt = 0;
     (*array)->len = length;
