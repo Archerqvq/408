@@ -198,22 +198,12 @@ bool sort_list(PNODE pHead)
         return res;
     }
 
-    PNODE p = pHead, q, tmp_p;
+    PNODE p = pHead, q;
 
     for (i = 0; i < len - 1; i++)
     {
         for (j = 0; j < len - 1 - i; j++)
         {
-            // tmp_p = p->pNext;
-            // q = p->pNext->pNext;
-            // if (tmp_p->data < q->data)
-            // {
-            //     tmp_data = tmp_p->data;
-            //     tmp_p->data = q->data;
-            //     q->data = tmp_data;
-            // }
-            // p = p->pNext;
-
             p = p->pNext;
             q = p->pNext;
             if (p->data < q->data)
@@ -229,3 +219,35 @@ bool sort_list(PNODE pHead)
     res = true;
     return res;
 }
+
+// Another way to implement sort_list
+// void sort_list(PNODE pHead)
+// {
+//     int i, j, t;
+//     PNODE p, q;
+//     int len = length_list(pHead);
+
+//     for (i = 0, p = pHead->pNext; i < len - 1; i++, p = p->pNext)
+//     {
+
+//         for (j = 0, q = p->pNext; j < len - 1 - i; j++, q = q->pNext)
+//         {
+//             if (p->data > q->data) // Just like a[i] > a[j] in array
+//             {
+//                 t = p->data;       // Just like t = a[i] in array
+//                 p->data = q->data; // Just like a[i] = a[j] in array
+//                 q->data = t;       // Just like a[j] = t in array
+//             }
+//         }
+
+//         // for (j = i + 1, q = p->pNext; j < len; j++, q = q->pNext)
+//         // {
+//         //     if (p->data > q->data) // Just like a[i] > a[j] in array
+//         //     {
+//         //         t = p->data;       // Just like t = a[i] in array
+//         //         p->data = q->data; // Just like a[i] = a[j] in array
+//         //         q->data = t;       // Just like a[j] = t in array
+//         //     }
+//         // }
+//     }
+// }

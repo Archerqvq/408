@@ -108,6 +108,7 @@ bool arr_append(parr array, int val)
     if (true == is_full(array))
     {
         printf("Array is full\n");
+		return res;
     }
 
     // array->pBase[array->cnt] = val;
@@ -246,7 +247,7 @@ bool sort_list(parr array)
         return res;
     }
 
-    for (i = 0; i < array->cnt; i++)
+    for (i = 0; i < array->cnt - 1; i++)
     {
         for (j = 0; j < array->cnt - 1 - i; j++)
         {
