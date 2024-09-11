@@ -1,4 +1,4 @@
-// data: 22-01-2024 - by lin
+// date: 22-01-2024 - by lin
 
 #include <stdio.h>
 #include <stdlib.h>

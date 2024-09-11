@@ -1,4 +1,4 @@
-// data: 22-01-2024 - by lin
+// date: 22-01-2024 - by lin
 // Check
 // https://embetronicx.com/tutorials/p_language/c/stack-data-structure-in-c-programming/
 // for more information.

@@ -1,4 +1,4 @@
-// data: 22-1-2024 - by lin
+// date: 22-1-2024 - by lin
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -108,7 +108,7 @@ bool arr_append(parr array, int val)
     if (true == is_full(array))
     {
         printf("Array is full\n");
-		return res;
+        return res;
     }
 
     // array->pBase[array->cnt] = val;
